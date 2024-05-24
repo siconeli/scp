@@ -3,5 +3,4 @@
 env
 *.pyc
 scp/__pycache__/
-settings_development.py
 migrations/

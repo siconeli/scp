@@ -4,16 +4,18 @@ from django.contrib.auth.models import User
 class Base(models.Model):
     ativo = models.BooleanField(default=True)
     criado_em = models.DateField(auto_now_add=True)
-    criador_por = models.ForeignKey(User, )
-    # origem = 
+    criador_por = models.ForeignKey(User, on_delete=models.PROTECT)
+    origem = models.CharField(max_length=10, default='usuario')
 
     class Meta:
         abstract = True
 
-# class Company(Base):
-    # logo =
-    # cnpj = 
-    # razao_social =
+class Company(Base):
+    logo = models.ImageField(upload_to='logos/')
+    cnpj = models.CharField(max_length=20)
+    razao_social = models.CharField(max_length=100)
+    nome_fantasia = models.CharField(max_length=100)
+    # porte = 
     # uf =  
     # municipio = 
     # logradouro = 

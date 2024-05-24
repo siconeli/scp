@@ -103,7 +103,7 @@ DATABASES = {
         "ENGINE": "django_tenants.postgresql_backend",
         "NAME": "scp_development",
         "USER": "postgres",
-        "PASSWORD": "Clodomir753$",
+        "PASSWORD": "Saasscp1590$",
         "HOST": "localhost",
         "PORT": "5432",
     }

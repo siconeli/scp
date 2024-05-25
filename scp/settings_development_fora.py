@@ -43,6 +43,7 @@ SHARED_APPS = ( # Compartilhados
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'widget_tweaks',
 )
 
 TENANT_APPS = ( # Locatários

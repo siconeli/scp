@@ -1,0 +1,87 @@
+{% extends 'home.html' %}
+
+{% load widget_tweaks %} 
+
+{% block conteudo %}
+    <br>
+    <form method="post" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col">
+                {% render_field form.logo name="logo" %}
+            </div>
+            <br>
+            <div class="col">
+                <label for="cnpj">CNPJ</label>
+                <input type="text" name="cnpj" value="{{ object.cnpj }}">
+            </div>
+            <br>
+            <div class="col">
+                <label for="razao_social">Razão Social</label>
+                <input type="text" name="razao_social" value="{{ object.razao_social }}">
+            </div>
+            <br>
+            <div class="col">
+                <label for="porte">Porte</label>
+                <input type="text" name="porte" value="{{ object.porte }}">
+            </div>
+            <br>
+            <div class="col">
+                <label for="nome_fantasia">Nome Fantasia</label>
+                <input type="text" name="nome_fantasia" value="{{ object.nome_fantasia }}">
+            </div>
+            <br>
+            <div class="col">
+                <label for="uf">UF</label>
+                <input type="text" name="uf" value="{{ object.uf }}">
+            </div>
+            <br>
+            <div class="col">
+                <label for="municipio">Município</label>
+                <input type="text" name="municipio" value="{{ object.municipio }}">
+            </div>
+            <br>
+            <div class="col">
+                <label for="logradouro">Logradouro</label>
+                <input type="text" name="logradouro" value="{{ object.logradouro }}">
+            </div>
+            <br>
+            <div class="col">
+                <label for="numero">Número</label>
+                <input type="text" name="numero" value="{{ object.numero }}">
+            </div>
+            <br>
+            <div class="col">
+                <label for="cep">Cep</label>
+                <input type="text" name="cep" value="{{ object.cep }}">
+            </div>
+            <br>
+            <div class="col">
+                <label for="bairro">Bairro</label>
+                <input type="text" name="bairro" value="{{ object.bairro }}">
+            </div>
+            <br>
+            <div class="col">
+                <label for="complemento">Complemento</label>
+                <input type="text" name="complemento" value="{{ object.complemento }}">
+            </div>
+            <br>
+            <div class="col">
+                <label for="celular">Celular</label>
+                <input type="text" name="celular" value="{{ object.celular }}">
+            </div>
+            <br>
+            <div class="col">
+                <label for="telefone">Telefone</label>
+                <input type="text" name="telefone" value="{{ object.telefone }}">
+            </div>
+            <br>
+            <div class="col">
+                <label for="email">E-mail</label>
+                <input type="text" name="email" value="{{ object.email }}">
+            </div>
+        </div>
+        <br>
+        <button type="submit">Salvar</button>
+    </form>
+{% endblock %}

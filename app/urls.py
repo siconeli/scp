@@ -1,7 +1,9 @@
 from django.contrib import admin
 from django.urls import path
-# from .views import UserCreate
+from .views import Home, CompanyDetail, CompanyUpdate 
 
 urlpatterns = [
-    # path('user-create/', UserCreate.as_view(), name='user-create'),
+    path('', Home.as_view(), name='home'),
+    path('company/', CompanyDetail.as_view(), name='company'), 
+    path('company/update/<int:id>/', CompanyUpdate.as_view(), name='company-update')
 ]

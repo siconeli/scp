@@ -1,0 +1,25 @@
+<h1>INÍCIO: {{request.tenant}}</h1>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% block titulo %}
+        <title>Início</title>
+    {% endblock %}
+</head>
+<body>
+    {% block menu %}
+        <div class="row">
+            <a href="{% url 'home' %}">Início</a>
+            <a href="{% url 'company' %}">Empresa</a>
+        </div>
+    {% endblock %}
+    
+    {% block conteudo %}
+    
+    {% endblock %}
+</body>
+</html>

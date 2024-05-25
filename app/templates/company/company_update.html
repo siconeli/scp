@@ -70,7 +70,7 @@
             <br>
             <div class="col">
                 <label for="complemento">Complemento</label>
-                <input type="text" name="complemento" value="{{ object.complemento }}">
+                <input type="text" name="complemento" value="{{ object.complemento|default:'' }}">
             </div>
             <br>
             <div class="col">

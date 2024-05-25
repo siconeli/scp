@@ -19,7 +19,11 @@
     {% if object %}
         <div class="row">
             <div class="col">
-                <img src="{{ object.logo.url  }}" alt="Image" style="width: 100px;">
+                {% if object.logo %}
+                    <img src="{{ object.logo.url  }}" alt="Image" style="width: 100px;">
+                {% else %}
+                    <img src="{% static 'img/brasao_default.jpg' %}" alt="Logo" style="width: 100px;">
+                {% endif %}
             </div>
             <br>
             <div class="col">
@@ -74,7 +78,7 @@
             <br>
             <div class="col">
                 <label for="complemento">Complemento</label>
-                <input type="text" name="complemento" value="{{ object.complemento }}" readonly>
+                <input type="text" name="complemento" value="{{ object.complemento|default:'' }}" readonly>
             </div>
             <br>
             <div class="col">

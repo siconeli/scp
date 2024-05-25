@@ -1,4 +1,3 @@
-
 """
 Django settings for scp project.
 
@@ -43,6 +42,7 @@ SHARED_APPS = ( # Compartilhados
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_cleanup.apps.CleanupConfig',
     'widget_tweaks',
 )
 

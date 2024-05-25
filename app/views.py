@@ -4,6 +4,7 @@ from django.views.generic import TemplateView
 from django.contrib.auth.models import User
 from .models import Company
 from django.urls import reverse_lazy
+from django.http import HttpResponse
 
 class Home(TemplateView):
     template_name = 'home.html'
@@ -11,8 +12,16 @@ class Home(TemplateView):
 class CompanyCreate(CreateView):
     model = Company
     template_name = 'company/company_create.html'
-    fields = ['']
-    # success_url = reverse_lazy('')
+    fields = ['cnpj', 'razao_social', 'porte', 'nome_fantasia', 'logo', 'uf', 'municipio', 'logradouro', 'numero', 'cep', 'bairro', 'complemento', 'celular', 'telefone', 'email']
+    success_url = reverse_lazy('company')
+
+    def form_valid(self, form):
+        form.instance.criado_por = self.request.user
+
+        if self.model.objects.exists():
+            form.add_error(None, 'Empresa já cadastrada.') # TRATAR O ERROR NO LADO DO CLIENTE(TEMPLATE) ***
+            return self.form_invalid(form)  
+        return super().form_valid(form)
 
 class CompanyUpdate(UpdateView):
     model = Company
@@ -29,14 +38,20 @@ class CompanyDetail(DetailView):
     template_name = 'company/company_detail.html'
 
     def get_object(self, queryset=None):
-        return self.model.objects.filter(ativo=True).latest('id')
-    
+        try:
+            return self.model.objects.filter(ativo=True).latest('id')
+        except self.model.DoesNotExist:
+            return None
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        company = self.model.objects.filter(ativo=True).latest('id')
-        context['company_id'] = company.id
+        try:
+            company = self.model.objects.filter(ativo=True).latest('id')
+            context['company_id'] = company.id
+        except self.model.DoesNotExist:
+            context['company_id'] = None
+        
         return context
-
 
 # class UserCreate(CreateView):
 #     template_name = 'user/user_create.html'

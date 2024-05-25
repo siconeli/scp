@@ -149,16 +149,32 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = (
-  os.path.join(BASE_DIR, "media")
+  os.path.join(BASE_DIR, 'media')
 )
 
+# SETTINGS - TENANT STATICS -------------------------------------------------------------------
+STATICFILES_FINDERS = [
+    "django_tenants.staticfiles.finders.TenantFileSystemFinder",  # Must be first
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
+
+MULTITENANT_STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "tenants/%s/static" ),
+]
+
+STATICFILES_STORAGE = "django_tenants.staticfiles.storage.TenantStaticFilesStorage"
+# ----------------------------------------------------------------------------------
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

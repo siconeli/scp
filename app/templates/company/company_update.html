@@ -8,6 +8,13 @@
         {% csrf_token %}
         <div class="row">
             <div class="col">
+                <button type="submit">Salvar</button>
+                <a href="{% url 'company' %}">Voltar</a>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col">
                 {% render_field form.logo name="logo" %}
             </div>
             <br>
@@ -81,7 +88,5 @@
                 <input type="text" name="email" value="{{ object.email }}">
             </div>
         </div>
-        <br>
-        <button type="submit">Salvar</button>
     </form>
 {% endblock %}

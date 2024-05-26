@@ -15,7 +15,7 @@ class Company(Base):
     razao_social = models.CharField(max_length=100)
     porte = models.CharField(max_length=3)
     nome_fantasia = models.CharField(max_length=100)
-    logo = models.ImageField(upload_to='logos/', blank=True, null=True)
+    logo = models.ImageField(upload_to='media/', blank=True, null=True)
     uf =  models.CharField(max_length=2)
     municipio = models.CharField(max_length=50)
     logradouro = models.CharField(max_length=50)

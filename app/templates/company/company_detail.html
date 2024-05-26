@@ -16,161 +16,83 @@
         </div>
     </div>
     <br>
-    {% if object %}
-        <div class="row">
-            <div class="col">
-                {% if object.logo %}
-                    <img src="{{ object.logo.url  }}" alt="Image" style="width: 100px;">
-                {% else %}
-                    <img src="{% static 'img/brasao_default.jpg' %}" alt="Logo" style="width: 100px;">
-                {% endif %}
-            </div>
-            <br>
-            <div class="col">
-                <label for="cnpj">CNPJ</label>
-                <input type="text" name="cnpj" value="{{ object.cnpj }}" readonly>
-            </div>
-            <br>
-            <div class="col">
-                <label for="razao_social">Razão Social</label>
-                <input type="text" name="razao_social" value="{{ object.razao_social }}" readonly>
-            </div>
-            <br>
-            <div class="col">
-                <label for="porte">Porte</label>
-                <input type="text" name="porte" value="{{ object.porte }}" readonly>
-            </div>
-            <br>
-            <div class="col">
-                <label for="nome_fantasia">Nome Fantasia</label>
-                <input type="text" name="nome_fantasia" value="{{ object.nome_fantasia }}" readonly>
-            </div>
-            <br>
-            <div class="col">
-                <label for="uf">UF</label>
-                <input type="text" name="uf" value="{{ object.uf }}" readonly>
-            </div>
-            <br>
-            <div class="col">
-                <label for="municipio">Município</label>
-                <input type="text" name="municipio" value="{{ object.municipio }}" readonly>
-            </div>
-            <br>
-            <div class="col">
-                <label for="logradouro">Logradouro</label>
-                <input type="text" name="logradouro" value="{{ object.logradouro }}" readonly>
-            </div>
-            <br>
-            <div class="col">
-                <label for="numero">Número</label>
-                <input type="text" name="numero" value="{{ object.numero }}" readonly>
-            </div>
-            <br>
-            <div class="col">
-                <label for="cep">Cep</label>
-                <input type="text" name="cep" value="{{ object.cep }}" readonly>
-            </div>
-            <br>
-            <div class="col">
-                <label for="bairro">Bairro</label>
-                <input type="text" name="bairro" value="{{ object.bairro }}" readonly>
-            </div>
-            <br>
-            <div class="col">
-                <label for="complemento">Complemento</label>
-                <input type="text" name="complemento" value="{{ object.complemento|default:'' }}" readonly>
-            </div>
-            <br>
-            <div class="col">
-                <label for="celular">Celular</label>
-                <input type="text" name="celular" value="{{ object.celular }}" readonly>
-            </div>
-            <br>
-            <div class="col">
-                <label for="telefone">Telefone</label>
-                <input type="text" name="telefone" value="{{ object.telefone }}" readonly>
-            </div>
-            <br>
-            <div class="col">
-                <label for="email">E-mail</label>
-                <input type="text" name="email" value="{{ object.email }}" readonly>
-            </div>
-        </div>
-    {% else %}
-        <div class="row">
-            <div class="col">
+    <div class="row">
+        <div class="col">
+            {% if object.logo %}
+                <img src="{{ object.logo.url  }}" alt="Image" style="width: 100px;">
+            {% else %}
                 <img src="{% static 'img/brasao_default.jpg' %}" alt="Logo" style="width: 100px;">
-            </div>
-            <br>
-            <div class="col">
-                <label for="cnpj">CNPJ</label>
-                <input type="text" name="cnpj" value="" readonly>
-            </div>
-            <br>
-            <div class="col">
-                <label for="razao_social">Razão Social</label>
-                <input type="text" name="razao_social" value="" readonly>
-            </div>
-            <br>
-            <div class="col">
-                <label for="porte">Porte</label>
-                <input type="text" name="porte" value="" readonly>
-            </div>
-            <br>
-            <div class="col">
-                <label for="nome_fantasia">Nome Fantasia</label>
-                <input type="text" name="nome_fantasia" value="" readonly>
-            </div>
-            <br>
-            <div class="col">
-                <label for="uf">UF</label>
-                <input type="text" name="uf" value="" readonly>
-            </div>
-            <br>
-            <div class="col">
-                <label for="municipio">Município</label>
-                <input type="text" name="municipio" value="" readonly>
-            </div>
-            <br>
-            <div class="col">
-                <label for="logradouro">Logradouro</label>
-                <input type="text" name="logradouro" value="" readonly>
-            </div>
-            <br>
-            <div class="col">
-                <label for="numero">Número</label>
-                <input type="text" name="numero" value="" readonly>
-            </div>
-            <br>
-            <div class="col">
-                <label for="cep">Cep</label>
-                <input type="text" name="cep" value="" readonly>
-            </div>
-            <br>
-            <div class="col">
-                <label for="bairro">Bairro</label>
-                <input type="text" name="bairro" value="" readonly>
-            </div>
-            <br>
-            <div class="col">
-                <label for="complemento">Complemento</label>
-                <input type="text" name="complemento" value="" readonly>
-            </div>
-            <br>
-            <div class="col">
-                <label for="celular">Celular</label>
-                <input type="text" name="celular" value="" readonly>
-            </div>
-            <br>
-            <div class="col">
-                <label for="telefone">Telefone</label>
-                <input type="text" name="telefone" value="" readonly>
-            </div>
-            <br>
-            <div class="col">
-                <label for="email">E-mail</label>
-                <input type="text" name="email" value="" readonly>
-            </div>
+            {% endif %}
         </div>
-    {% endif %}
+        <br>
+        <div class="col">
+            <label for="cnpj">CNPJ</label>
+            <input type="text" name="cnpj" value="{{ object.cnpj|default:'' }}" readonly>
+        </div>
+        <br>
+        <div class="col">
+            <label for="razao_social">Razão Social</label>
+            <input type="text" name="razao_social" value="{{ object.razao_social|default:'' }}" readonly>
+        </div>
+        <br>
+        <div class="col">
+            <label for="porte">Porte</label>
+            <input type="text" name="porte" value="{{ object.porte|default:'' }}" readonly>
+        </div>
+        <br>
+        <div class="col">
+            <label for="nome_fantasia">Nome Fantasia</label>
+            <input type="text" name="nome_fantasia" value="{{ object.nome_fantasia|default:'' }}" readonly>
+        </div>
+        <br>
+        <div class="col">
+            <label for="uf">UF</label>
+            <input type="text" name="uf" value="{{ object.uf|default:'' }}" readonly>
+        </div>
+        <br>
+        <div class="col">
+            <label for="municipio">Município</label>
+            <input type="text" name="municipio" value="{{ object.municipio|default:'' }}" readonly>
+        </div>
+        <br>
+        <div class="col">
+            <label for="logradouro">Logradouro</label>
+            <input type="text" name="logradouro" value="{{ object.logradouro|default:'' }}" readonly>
+        </div>
+        <br>
+        <div class="col">
+            <label for="numero">Número</label>
+            <input type="text" name="numero" value="{{ object.numero|default:'' }}" readonly>
+        </div>
+        <br>
+        <div class="col">
+            <label for="cep">Cep</label>
+            <input type="text" name="cep" value="{{ object.cep|default:'' }}" readonly>
+        </div>
+        <br>
+        <div class="col">
+            <label for="bairro">Bairro</label>
+            <input type="text" name="bairro" value="{{ object.bairro|default:'' }}" readonly>
+        </div>
+        <br>
+        <div class="col">
+            <label for="complemento">Complemento</label>
+            <input type="text" name="complemento" value="{{ object.complemento|default:'' }}" readonly>
+        </div>
+        <br>
+        <div class="col">
+            <label for="celular">Celular</label>
+            <input type="text" name="celular" value="{{ object.celular|default:'' }}" readonly>
+        </div>
+        <br>
+        <div class="col">
+            <label for="telefone">Telefone</label>
+            <input type="text" name="telefone" value="{{ object.telefone|default:'' }}" readonly>
+        </div>
+        <br>
+        <div class="col">
+            <label for="email">E-mail</label>
+            <input type="text" name="email" value="{{ object.email|default:'' }}" readonly>
+        </div>
+    </div>
 {% endblock %}

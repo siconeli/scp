@@ -159,7 +159,7 @@ MEDIA_ROOT = (
   os.path.join(BASE_DIR, 'media')
 )
 
-# SETTINGS - TENANT STATICS -------------------------------------------------------------------
+# SETTINGS - TENANT ARQUIVOS STATICOS -------------------------------------------------------------------
 STATICFILES_FINDERS = [
     "django_tenants.staticfiles.finders.TenantFileSystemFinder",  # Must be first
     "django.contrib.staticfiles.finders.FileSystemFinder",
@@ -171,6 +171,14 @@ MULTITENANT_STATICFILES_DIRS = [
 ]
 
 STATICFILES_STORAGE = "django_tenants.staticfiles.storage.TenantStaticFilesStorage"
+# ----------------------------------------------------------------------------------
+
+# SETTINGS - TENANT ARQUIVOS DE MÍDIA -----------------------------------------------
+DEFAULT_FILE_STORAGE = "django_tenants.files.storage.TenantFileSystemStorage"
+
+# MULTITENANT_MEDIA_ROOT = os.path.join(BASE_DIR, "/%s/")
+
+# MULTITENANT_RELATIVE_MEDIA_ROOT = ""  # (default: create sub-directory for each tenant)
 # ----------------------------------------------------------------------------------
 
 # Default primary key field type

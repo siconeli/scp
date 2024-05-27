@@ -52,14 +52,3 @@ class CompanyDetail(DetailView):
             context['company_id'] = None
         
         return context
-
-class UserCreate(CreateView):
-    model = User
-    template_name = 'user/user_create.html'
-    fields = ['username', 'email', 'password']
-    success_url = reverse_lazy('')
-
-# class UserExtensionCreate(CreateView):
-#     template_name = 'user_extension/user_extension_create.html'
-#     model = User
-#     fields = ['username', 'first_name', 'last_name', 'password']

@@ -30,10 +30,12 @@ class Company(Base):
     def __str__(self):
             return self.razao_social
 
-# class UserExtension(models.Model):
+# class UserExtension(Base):
 #     user = models.OneToOneField(User, on_delete=models.CASCADE)
 #     cpf = models.CharField(max_length=20)
-    
+#     # cargo = 
+#     # nivel = 
+
 #     def __str__(self):
 #         return self.cpf
 

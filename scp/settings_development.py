@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+# SETTINGS - TENANT ------------------------------------------------------
 SHARED_APPS = ( # Compartilhados
     'django_tenants',  
     'customers', 
@@ -64,6 +65,7 @@ TENANT_MODEL = "customers.Client"
 TENANT_DOMAIN_MODEL = "customers.Domain"  
 
 PUBLIC_SCHEMA_URLCONF = 'customers.urls'
+# -------------------------------------------------------------------
 
 MIDDLEWARE = [
     'django_tenants.middleware.main.TenantMainMiddleware',
@@ -81,7 +83,7 @@ ROOT_URLCONF = 'scp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -175,10 +177,6 @@ STATICFILES_STORAGE = "django_tenants.staticfiles.storage.TenantStaticFilesStora
 
 # SETTINGS - TENANT ARQUIVOS DE MÍDIA -----------------------------------------------
 DEFAULT_FILE_STORAGE = "django_tenants.files.storage.TenantFileSystemStorage"
-
-# MULTITENANT_MEDIA_ROOT = os.path.join(BASE_DIR, "/%s/")
-
-# MULTITENANT_RELATIVE_MEDIA_ROOT = ""  # (default: create sub-directory for each tenant)
 # ----------------------------------------------------------------------------------
 
 # Default primary key field type

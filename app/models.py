@@ -1,10 +1,10 @@
 from django.db import models
-from django.contrib.auth.models import User
+from usuarios.models import Usuario
 
 class Base(models.Model):
     ativo = models.BooleanField(default=True)
     criado_em = models.DateField(auto_now_add=True)
-    criado_por = models.ForeignKey(User, on_delete=models.PROTECT)
+    criado_por = models.ForeignKey(Usuario, on_delete=models.PROTECT)
     origem = models.CharField(max_length=10, default='usuario')
 
     class Meta:

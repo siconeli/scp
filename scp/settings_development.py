@@ -16,7 +16,6 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -27,7 +26,6 @@ SECRET_KEY = 'django-insecure-*0gv&x+&2gxetfg!l8uw1mtggj5g5t=gn2n-wsvx@g4(-^l10#
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -45,6 +43,7 @@ SHARED_APPS = ( # Compartilhados
     'django.contrib.staticfiles',
     'django_cleanup.apps.CleanupConfig',
     'widget_tweaks',
+    'usuarios',
 )
 
 TENANT_APPS = ( # Locatários
@@ -56,6 +55,7 @@ TENANT_APPS = ( # Locatários
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'usuarios',
 )
 
 INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in SHARED_APPS]
@@ -65,6 +65,11 @@ TENANT_MODEL = "customers.Client"
 TENANT_DOMAIN_MODEL = "customers.Domain"  
 
 PUBLIC_SCHEMA_URLCONF = 'customers.urls'
+# -------------------------------------------------------------------
+
+# Config auth (sobrescrevendo o User para utilizar o meu app de usuario customizado)
+AUTH_USER_MODEL = 'usuarios.Usuario'
+
 # -------------------------------------------------------------------
 
 MIDDLEWARE = [

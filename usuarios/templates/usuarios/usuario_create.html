@@ -1,0 +1,89 @@
+{% extends 'home.html' %}
+
+{% block titulo %}
+    <title>Cadastrar Usuário</title>
+{% endblock %}
+
+{% block conteudo %}
+    <br>
+    {% if messages %}
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    {% endif %}
+    <br>
+
+    <h4>Cadastrar Usuário</h4>
+    <div class="row">
+        <div class="col">
+            <form method="post" action="{% url 'usuario-create' %}">
+                {% csrf_token %}
+
+                <div class="row">
+                    <button type="submit">Cadastrar</button>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <label for="username">Usuário</label>
+                        <input type="text" name="username" id="username" placeholder="Digite seu nome de usuário..." required>
+                    </div>
+                    <br>
+                    <div class="col">
+                        <label for="password">Senha</label>
+                        <input type="password" name="password" id="password" placeholder="Digite sua senha..." required>
+                    </div>
+                    <br>
+                    <div class="col">
+                        <label for="first_name">Nome</label>
+                        <input type="text" name="first_name" id="first_name" placeholder="Digite seu nome..." required>
+                    </div>
+                    <br>
+                    <div class="col">
+                        <label for="cargo">Cargo</label>
+                        <select name="cargo" id="cargo" required>
+                            <option value="">------</option>
+                            <option value="G">Gerente</option>
+                            <option value="A">Atendente</option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+            </form>
+        </div>
+    </div>
+    <br>
+    <h4>Lista de usuários</h4>
+    <div class="row">
+        <div class="col">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Usuário</th>
+                        <th>Nome</th>
+                        <th>Cargo</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for usuario in usuarios %}
+                    <tr>
+                        <td>{{ usuario.username }}</td>
+                        <td>{{ usuario.first_name }}</td>
+                        <td>
+                            {% if usuario.cargo == 'G' %}
+                                Gerente
+                            {% else %}
+                                Atendente
+                            {% endif %}
+                        <td>
+                            <a href="{% url 'usuario-update' usuario.id %}">Editar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+        
+{% endblock %}

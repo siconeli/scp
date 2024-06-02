@@ -1,54 +1,53 @@
-from django.views.generic.edit import CreateView, UpdateView
-from django.views.generic.detail import DetailView
-from django.views.generic import TemplateView
-from django.contrib.auth.models import User
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import CompanyForm
+from django.contrib import messages
 from .models import Company
-from django.urls import reverse_lazy
-from django.http import HttpResponse
+from django.core.exceptions import ObjectDoesNotExist
+# from django.http import HttpResponse
+from rolepermissions.decorators import has_permission_decorator
 
-class Home(TemplateView):
-    template_name = 'home.html'
+def Home(request):
+    return render(request, 'home.html')
 
-class CompanyCreate(CreateView):
-    model = Company
-    template_name = 'company/company_create.html'
-    fields = ['cnpj', 'razao_social', 'porte', 'nome_fantasia', 'logo', 'uf', 'municipio', 'logradouro', 'numero', 'cep', 'bairro', 'complemento', 'celular', 'telefone', 'email']
-    success_url = reverse_lazy('company')
+def CompanyView(request):
+    try:
+        company = Company.objects.filter(ativo=True).latest('id')
+    except ObjectDoesNotExist:
+        company = None    
+    context = {
+        'company': company
+    }
 
-    def form_valid(self, form):
-        form.instance.criado_por = self.request.user
+    return render(request, 'company/company_view.html', context)
 
-        if self.model.objects.exists():
-            form.add_error(None, 'Empresa já cadastrada.') # TRATAR O ERROR NO LADO DO CLIENTE(TEMPLATE) ***
-            return self.form_invalid(form)  
-        return super().form_valid(form)
+@has_permission_decorator('cadastrar_empresa')
+def CompanyCreate(request):
+    form = CompanyForm(request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            if Company.objects.filter(ativo=True).exists():
+                messages.error(request, 'Já existe uma empresa cadastrada, não é permitido criar outra!') # TODO Tratar o error no front-end.
+                return render(request, 'company/company_create.html')
+            else: 
+                form.instance.criado_por = request.user
+                form.save()
+                return redirect('company-view')
+        else:
+            messages.error(request, 'Erro ao cadastrar empresa, o formulário não é válido!')
+            
+    return render(request, 'company/company_create.html', {'form': form} )
 
-class CompanyUpdate(UpdateView):
-    model = Company
-    template_name = 'company/company_update.html'
-    fields = ['cnpj', 'razao_social', 'porte', 'nome_fantasia', 'logo', 'uf', 'municipio', 'logradouro', 'numero', 'cep', 'bairro', 'complemento', 'celular', 'telefone', 'email']
-    success_url = reverse_lazy('company')
+def CompanyUpdate(request, id):
+    company = get_object_or_404(Company, id=id)
+    if request.method == 'POST':
+        form = CompanyForm(request.POST, instance=company)
+        if form.is_valid():
+            form.save()
+            return redirect('company-view')
+        else:
+            messages.error(request, 'Erro ao atualizar empresa, o formulário não é válido! ')
+    else:
+        form = CompanyForm(instance=company)
 
-    def get_object(self, queryset=None):
-        company_id = self.kwargs.get('id')
-        return self.model.objects.get(id=company_id)
+    return render(request, 'company/company_update.html', {'form': form})
 
-class CompanyDetail(DetailView):
-    model = Company
-    template_name = 'company/company_detail.html'
-
-    def get_object(self, queryset=None):
-        try:
-            return self.model.objects.filter(ativo=True).latest('id')
-        except self.model.DoesNotExist:
-            return None
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        try:
-            company = self.model.objects.filter(ativo=True).latest('id')
-            context['company_id'] = company.id
-        except self.model.DoesNotExist:
-            context['company_id'] = None
-        
-        return context

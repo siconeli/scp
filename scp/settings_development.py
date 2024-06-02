@@ -44,6 +44,7 @@ SHARED_APPS = ( # Compartilhados
     'django_cleanup.apps.CleanupConfig',
     'widget_tweaks',
     'usuarios',
+    'rolepermissions',
 )
 
 TENANT_APPS = ( # Locatários
@@ -55,7 +56,6 @@ TENANT_APPS = ( # Locatários
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'usuarios',
 )
 
 INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in SHARED_APPS]
@@ -67,9 +67,12 @@ TENANT_DOMAIN_MODEL = "customers.Domain"
 PUBLIC_SCHEMA_URLCONF = 'customers.urls'
 # -------------------------------------------------------------------
 
-# Config auth (sobrescrevendo o User para utilizar o meu app de usuario customizado)
+# Settings auth (sobrescrevendo o User para utilizar o meu app de usuario customizado)
 AUTH_USER_MODEL = 'usuarios.Usuario'
+# -------------------------------------------------------------------
 
+# Role Permissions (Controle de permissões de usuário)
+ROLEPERMISSIONS_MODULE = 'scp.roles'
 # -------------------------------------------------------------------
 
 MIDDLEWARE = [
@@ -104,9 +107,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'scp.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
 DATABASES = {
     "default": {
         "ENGINE": "django_tenants.postgresql_backend",
@@ -118,12 +118,11 @@ DATABASES = {
     }
 }
 
+# Settings Tenant
 DATABASE_ROUTERS = (
     'django_tenants.routers.TenantSyncRouter',
 )
 
-# Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -141,9 +140,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/5.0/topics/i18n/
-
 LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'America/Sao_Paulo'
@@ -152,9 +148,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
 
@@ -183,9 +176,6 @@ STATICFILES_STORAGE = "django_tenants.staticfiles.storage.TenantStaticFilesStora
 # SETTINGS - TENANT ARQUIVOS DE MÍDIA -----------------------------------------------
 DEFAULT_FILE_STORAGE = "django_tenants.files.storage.TenantFileSystemStorage"
 # ----------------------------------------------------------------------------------
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

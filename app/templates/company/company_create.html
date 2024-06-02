@@ -4,12 +4,20 @@
 
 {% block conteudo %}
     <br>
-    <form method="post" enctype="multipart/form-data">
+    {% if messages %}
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    {% endif %}
+    <br>
+
+    <form method="post" action="{% url 'company-create' %}" enctype="multipart/form-data">
         {% csrf_token %}
+        
         <div class="row">
             <div class="col">
                 <button type="submit">Salvar</button>
-                <a href="{% url 'company' %}">Voltar</a>
+                <a href="{% url 'company-view' %}">Voltar</a>
             </div>
         </div>
         <br>

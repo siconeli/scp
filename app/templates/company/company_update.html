@@ -4,12 +4,18 @@
 
 {% block conteudo %}
     <br>
-    <form method="post" action="" enctype="multipart/form-data">
+    {% if messages %}
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="row">
             <div class="col">
                 <button type="submit">Salvar</button>
-                <a href="{% url 'company' %}">Voltar</a>
+                <a href="{% url 'company-view' %}">Voltar</a>
             </div>
         </div>
         <br>
@@ -20,72 +26,72 @@
             <br>
             <div class="col">
                 <label for="cnpj">CNPJ</label>
-                <input type="text" name="cnpj" value="{{ object.cnpj|default:'' }}">
+                <input type="text" name="cnpj" value="{{ form.cnpj.value|default:'' }}">
             </div>
             <br>
             <div class="col">
                 <label for="razao_social">Razão Social</label>
-                <input type="text" name="razao_social" value="{{ object.razao_social|default:'' }}">
+                <input type="text" name="razao_social" value="{{ form.razao_social.value|default:'' }}">
             </div>
             <br>
             <div class="col">
                 <label for="porte">Porte</label>
-                <input type="text" name="porte" value="{{ object.porte|default:'' }}">
+                <input type="text" name="porte" value="{{ form.porte.value|default:'' }}">
             </div>
             <br>
             <div class="col">
                 <label for="nome_fantasia">Nome Fantasia</label>
-                <input type="text" name="nome_fantasia" value="{{ object.nome_fantasia|default:'' }}">
+                <input type="text" name="nome_fantasia" value="{{ form.nome_fantasia.value|default:'' }}">
             </div>
             <br>
             <div class="col">
                 <label for="uf">UF</label>
-                <input type="text" name="uf" value="{{ object.uf|default:'' }}">
+                <input type="text" name="uf" value="{{ form.uf.value|default:'' }}">
             </div>
             <br>
             <div class="col">
                 <label for="municipio">Município</label>
-                <input type="text" name="municipio" value="{{ object.municipio|default:'' }}">
+                <input type="text" name="municipio" value="{{ form.municipio.value|default:'' }}">
             </div>
             <br>
             <div class="col">
                 <label for="logradouro">Logradouro</label>
-                <input type="text" name="logradouro" value="{{ object.logradouro|default:'' }}">
+                <input type="text" name="logradouro" value="{{ form.logradouro.value|default:'' }}">
             </div>
             <br>
             <div class="col">
                 <label for="numero">Número</label>
-                <input type="text" name="numero" value="{{ object.numero|default:'' }}">
+                <input type="text" name="numero" value="{{ form.numero.value|default:'' }}">
             </div>
             <br>
             <div class="col">
                 <label for="cep">Cep</label>
-                <input type="text" name="cep" value="{{ object.cep|default:'' }}">
+                <input type="text" name="cep" value="{{ form.cep.value|default:'' }}">
             </div>
             <br>
             <div class="col">
                 <label for="bairro">Bairro</label>
-                <input type="text" name="bairro" value="{{ object.bairro|default:'' }}">
+                <input type="text" name="bairro" value="{{ form.bairro.value|default:'' }}">
             </div>
             <br>
             <div class="col">
                 <label for="complemento">Complemento</label>
-                <input type="text" name="complemento" value="{{ object.complemento|default:'' }}">
+                <input type="text" name="complemento" value="{{ form.complemento.value|default:'' }}">
             </div>
             <br>
             <div class="col">
                 <label for="celular">Celular</label>
-                <input type="text" name="celular" value="{{ object.celular|default:'' }}">
+                <input type="text" name="celular" value="{{ form.celular.value|default:'' }}">
             </div>
             <br>
             <div class="col">
                 <label for="telefone">Telefone</label>
-                <input type="text" name="telefone" value="{{ object.telefone|default:'' }}">
+                <input type="text" name="telefone" value="{{ form.telefone.value|default:'' }}">
             </div>
             <br>
             <div class="col">
                 <label for="email">E-mail</label>
-                <input type="text" name="email" value="{{ object.email|default:'' }}">
+                <input type="text" name="email" value="{{ form.email.value|default:'' }}">
             </div>
         </div>
     </form>

@@ -1,6 +1,6 @@
 {% load static %}
 
-<h1>INÍCIO: {{request.tenant}}</h1>
+<h1>Tenant: {{request.tenant}}</h1>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -16,7 +16,8 @@
     {% block menu %}
         <div class="row">
             <a href="{% url 'home' %}">Início</a>
-            <a href="{% url 'company' %}">Empresa</a>
+            <a href="{% url 'company-view' %}">Empresa</a>
+            <a href="{% url 'usuario-create' %}">Usuários</a>
         </div>
     {% endblock %}
     

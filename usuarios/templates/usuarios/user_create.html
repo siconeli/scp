@@ -1,0 +1,41 @@
+{% extends 'home.html' %}
+
+{% block conteudo %}
+    <br>
+    {% if messages %}
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    {% endif %}
+    <br>
+
+    <form method="post" action="{% url 'usuario-create' %}">
+        {% csrf_token %}
+
+        <div class="row">
+            <div class="col">
+                <label for="usuario">Usuário</label>
+                <input type="text" name="usuario" id="usuario" placeholder="Digite seu nome de usuário..." class="form-control" required>
+            </div>
+            <br>
+            <div class="col">
+                <label for="senha">Senha</label>
+                <input type="password" name="senha" id="senha" placeholder="Digite sua senha..." class="form-control" required>
+            </div>
+            <br>
+            <div class="col">
+                <label for="cargo">Cargo</label>
+                <select name="cargo" id="cargo" required>
+                    <option value="">------</option>
+                    <option value="G">Gerente</option>
+                    <option value="A">Atendente</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <button type="submit">Cadastrar</button>
+        </div>
+    </form>
+        
+{% endblock %}

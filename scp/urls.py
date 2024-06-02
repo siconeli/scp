@@ -22,6 +22,7 @@ from django.conf import settings
 urlpatterns = [
     path('app-central-admin/', admin.site.urls),
     path('', include('app.urls')),
+    path('', include('usuarios.urls')),
 ]
 
 if settings.DEBUG:

@@ -20,29 +20,37 @@ def CompanyView(request):
 
     return render(request, 'company/company_view.html', context)
 
-@has_permission_decorator('cadastrar_empresa')
+@has_permission_decorator('gerenciar_empresa')
 def CompanyCreate(request):
-    form = CompanyForm(request.POST or None)
+    form = CompanyForm(request.POST or None, request.FILES or None)
     if request.method == 'POST':
         if form.is_valid():
             if Company.objects.filter(ativo=True).exists():
-                messages.error(request, 'Já existe uma empresa cadastrada, não é permitido criar outra!') # TODO Tratar o error no front-end.
-                return render(request, 'company/company_create.html')
+                messages.error(request, 'Já existe uma empresa cadastrada, não é permitido cadastrar outra!') # TODO Tratar o error no front-end.
+                return redirect('company-create')
             else: 
-                form.instance.criado_por = request.user
-                form.save()
+                company_instance = form.save(commit=False)
+                company_instance.criado_por = request.user
+                company_instance.logo = request.FILES.get('logo')
+                company_instance.save()
                 return redirect('company-view')
         else:
             messages.error(request, 'Erro ao cadastrar empresa, o formulário não é válido!')
             
     return render(request, 'company/company_create.html', {'form': form} )
 
+@has_permission_decorator('gerenciar_empresa')
 def CompanyUpdate(request, id):
     company = get_object_or_404(Company, id=id)
     if request.method == 'POST':
-        form = CompanyForm(request.POST, instance=company)
+        form = CompanyForm(request.POST, request.FILES, instance=company)
         if form.is_valid():
-            form.save()
+            company_instance = form.save(commit=False)
+            if 'remove_logo' in request.POST:
+                company_instance.logo = None
+            elif request.FILES.get('logo'):
+                company_instance.logo = request.FILES.get('logo')
+            company_instance.save()
             return redirect('company-view')
         else:
             messages.error(request, 'Erro ao atualizar empresa, o formulário não é válido! ')

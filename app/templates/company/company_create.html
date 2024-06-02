@@ -1,7 +1,5 @@
 {% extends 'home.html' %}
 
-{% load widget_tweaks %} 
-
 {% block conteudo %}
     <br>
     {% if messages %}
@@ -23,57 +21,58 @@
         <br>
         <div class="row">
             <div class="col">
-                {% render_field form.logo name="logo" %}
+                <label for="logo">Logo</label>
+                <input type="file" name="logo" id="logo">
             </div>
             <br>
             <div class="col">
                 <label for="cnpj">CNPJ</label>
-                <input type="text" name="cnpj">
+                <input type="text" name="cnpj" id="logo" required>
             </div>
             <br>
             <div class="col">
                 <label for="razao_social">Razão Social</label>
-                <input type="text" name="razao_social">
+                <input type="text" name="razao_social" id="razao_social" required>
             </div>
             <br>
             <div class="col">
                 <label for="porte">Porte</label>
-                <input type="text" name="porte">
+                <input type="text" name="porte" id="porte" required>
             </div>
             <br>
             <div class="col">
                 <label for="nome_fantasia">Nome Fantasia</label>
-                <input type="text" name="nome_fantasia">
+                <input type="text" name="nome_fantasia" id="nome_fantasia" required>
             </div>
             <br>
             <div class="col">
                 <label for="uf">UF</label>
-                <input type="text" name="uf">
+                <input type="text" name="uf" id="uf" required>
             </div>
             <br>
             <div class="col">
                 <label for="municipio">Município</label>
-                <input type="text" name="municipio">
+                <input type="text" name="municipio" id="municipio" required>
             </div>
             <br>
             <div class="col">
                 <label for="logradouro">Logradouro</label>
-                <input type="text" name="logradouro">
+                <input type="text" name="logradouro" id="logradouro" required>
             </div>
             <br>
             <div class="col">
                 <label for="numero">Número</label>
-                <input type="text" name="numero">
+                <input type="text" name="numero" id="numero" required>
             </div>
             <br>
             <div class="col">
                 <label for="cep">Cep</label>
-                <input type="text" name="cep">
+                <input type="text" name="cep" id="cep" required>
             </div>
             <br>
             <div class="col">
                 <label for="bairro">Bairro</label>
-                <input type="text" name="bairro">
+                <input type="text" name="bairro" id="bairro" required>
             </div>
             <br>
             <div class="col">

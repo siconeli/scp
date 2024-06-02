@@ -16,7 +16,7 @@
     <br>
     <div class="row">
         <div class="col">
-            {% if object.logo %}
+            {% if company.logo %}
                 <img src="{{ company.logo.url  }}" alt="Image" style="width: 100px;">
             {% else %}
                 <img src="{% static 'img/brasao_default.jpg' %}" alt="Logo" style="width: 100px;">
@@ -25,72 +25,72 @@
         <br>
         <div class="col">
             <label for="cnpj">CNPJ</label>
-            <input type="text" name="cnpj" value="{{ company.cnpj|default:'' }}" readonly>
+            <input type="text" name="cnpj" id="cnpj" value="{{ company.cnpj|default:'' }}" readonly>
         </div>
         <br>
         <div class="col">
             <label for="razao_social">Razão Social</label>
-            <input type="text" name="razao_social" value="{{ company.razao_social|default:'' }}" readonly>
+            <input type="text" name="razao_social" id="razao_social" value="{{ company.razao_social|default:'' }}" readonly>
         </div>
         <br>
         <div class="col">
             <label for="porte">Porte</label>
-            <input type="text" name="porte" value="{{ company.porte|default:'' }}" readonly>
+            <input type="text" name="porte" id="porte" value="{{ company.porte|default:'' }}" readonly>
         </div>
         <br>
         <div class="col">
             <label for="nome_fantasia">Nome Fantasia</label>
-            <input type="text" name="nome_fantasia" value="{{ company.nome_fantasia|default:'' }}" readonly>
+            <input type="text" name="nome_fantasia" id="nome_fantasia" value="{{ company.nome_fantasia|default:'' }}" readonly>
         </div>
         <br>
         <div class="col">
             <label for="uf">UF</label>
-            <input type="text" name="uf" value="{{ company.uf|default:'' }}" readonly>
+            <input type="text" name="uf" id="uf" value="{{ company.uf|default:'' }}" readonly>
         </div>
         <br>
         <div class="col">
             <label for="municipio">Município</label>
-            <input type="text" name="municipio" value="{{ company.municipio|default:'' }}" readonly>
+            <input type="text" name="municipio" id="municipio" value="{{ company.municipio|default:'' }}" readonly>
         </div>
         <br>
         <div class="col">
             <label for="logradouro">Logradouro</label>
-            <input type="text" name="logradouro" value="{{ company.logradouro|default:'' }}" readonly>
+            <input type="text" name="logradouro" id="logradouro" value="{{ company.logradouro|default:'' }}" readonly>
         </div>
         <br>
         <div class="col">
             <label for="numero">Número</label>
-            <input type="text" name="numero" value="{{ company.numero|default:'' }}" readonly>
+            <input type="text" name="numero" id="numero" value="{{ company.numero|default:'' }}" readonly>
         </div>
         <br>
         <div class="col">
             <label for="cep">Cep</label>
-            <input type="text" name="cep" value="{{ company.cep|default:'' }}" readonly>
+            <input type="text" name="cep" id="cep" value="{{ company.cep|default:'' }}" readonly>
         </div>
         <br>
         <div class="col">
             <label for="bairro">Bairro</label>
-            <input type="text" name="bairro" value="{{ company.bairro|default:'' }}" readonly>
+            <input type="text" name="bairro" id="bairro" value="{{ company.bairro|default:'' }}" readonly>
         </div>
         <br>
         <div class="col">
             <label for="complemento">Complemento</label>
-            <input type="text" name="complemento" value="{{ company.complemento|default:'' }}" readonly>
+            <input type="text" name="complemento" id="complemento" value="{{ company.complemento|default:'' }}" readonly>
         </div>
         <br>
         <div class="col">
             <label for="celular">Celular</label>
-            <input type="text" name="celular" value="{{ company.celular|default:'' }}" readonly>
+            <input type="text" name="celular" id="celular" value="{{ company.celular|default:'' }}" readonly>
         </div>
         <br>
         <div class="col">
             <label for="telefone">Telefone</label>
-            <input type="text" name="telefone" value="{{ company.telefone|default:'' }}" readonly>
+            <input type="text" name="telefone" id="telefone" value="{{ company.telefone|default:'' }}" readonly>
         </div>
         <br>
         <div class="col">
             <label for="email">E-mail</label>
-            <input type="text" name="email" value="{{ company.email|default:'' }}" readonly>
+            <input type="text" name="email" id="email" value="{{ company.email|default:'' }}" readonly>
         </div>
     </div>
 {% endblock %}

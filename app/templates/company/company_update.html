@@ -1,7 +1,5 @@
 {% extends 'home.html' %}
 
-{% load widget_tweaks %} 
-
 {% block conteudo %}
     <br>
     {% if messages %}
@@ -21,7 +19,17 @@
         <br>
         <div class="row">
             <div class="col">
-                {% render_field form.logo name="logo" %}
+                {% if form.instance.logo %}
+                    <img src="{{ form.instance.logo.url }}">
+                
+                    <label for="remove_logo">Remover logo</label>
+                    <input type="checkbox" name="remove_logo" id="remove_logo">
+                {% endif %}
+            </div>
+            <br>
+            <div class="col">
+                <label for="logo">Logo</label>
+                <input type="file" name="logo" id="logo">
             </div>
             <br>
             <div class="col">

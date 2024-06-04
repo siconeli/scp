@@ -179,3 +179,8 @@ DEFAULT_FILE_STORAGE = "django_tenants.files.storage.TenantFileSystemStorage"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+#  REDIRECIONAMENTOS (Não estou utilizando, pois as minhas funções de Login e Logout já redirecionam para a url correta.) -------------------------------------------
+# LOGIN_REDIRECT_URL = 'home'  # Redireciona para a url de nome 'inicio' após realizar o login.
+# LOGOUT_REDIRECT_URL = 'login' # Ao fazer o logout, ira redirecionar para a url de nome 'login'.
+LOGIN_URL = 'login'  # Ao tentar acessar uma funcionalidade sem estar autenticado(logado), redireciona para a url informada.
+# -------------------------------------

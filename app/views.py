@@ -7,7 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from rolepermissions.decorators import has_permission_decorator
 
-@login_required
+# @login_required
 def Home(request):
     return render(request, 'home.html')
 

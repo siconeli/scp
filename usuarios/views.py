@@ -3,12 +3,36 @@ from django.urls import reverse
 from .forms import UsuarioCreateForm, UsuarioUpdateForm, UpdatePasswordForm
 from .models import Usuario
 from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from rolepermissions.decorators import has_permission_decorator
 from django.contrib.auth.hashers import check_password
+from django.http import HttpResponse
+
+def Login(request):
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            return redirect(reverse('home'))
+        return render(request, 'usuarios/login.html')
+    elif request.method == 'POST':
+        usuario = request.POST.get('username')
+        senha =  request.POST.get('password')
+
+        user = authenticate(username=usuario, password=senha)
+        if user is not None:
+            login(request, user)
+            return redirect(reverse('home'))
+        else:
+            messages.error(request, 'Usuário ou senha não encontrados!')
+            return render(request, 'usuarios/login.html')
+    
+def Logout(request):
+    if request.method == 'GET':
+        logout(request)
+        return redirect(reverse('login'))
 
 # TODO Corrigir os messages para erros
-# @login_required
+@login_required
 @has_permission_decorator('gerenciar_usuarios')
 def UsuarioCreate(request):        
     if request.method == 'POST':
@@ -31,7 +55,7 @@ def UsuarioCreate(request):
     return render(request, 'usuarios/usuario_create.html', {'usuarios': usuarios})
 
 # TODO Corrigir os messages para erros
-# @login_required
+@login_required
 @has_permission_decorator('gerenciar_usuarios')
 def UsuarioUpdate(request, id):
     usuario = get_object_or_404(Usuario, id=id)
@@ -59,7 +83,7 @@ def UsuarioUpdate(request, id):
     return render(request, 'usuarios/usuario_update.html', {'form':form})
 
 # TODO Corrigir os messages para erros
-# @login_required
+@login_required
 @has_permission_decorator('gerenciar_usuarios')
 def UpdatePassword(request, id):
     usuario = get_object_or_404(Usuario, id=id)

@@ -20,6 +20,7 @@ class UsuarioUpdateForm(forms.ModelForm):
         model = Usuario
         fields = ['is_active', 'username', 'first_name', 'cargo']
 
-class UsuarioUpdatePasswordForm(forms.ModelForm):
-    model = Usuario
-    fields = ['password']
+class UpdatePasswordForm(forms.ModelForm):
+    class Meta:
+        model = Usuario
+        fields = ['password']

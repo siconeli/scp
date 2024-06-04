@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from .forms import UsuarioCreateForm, UsuarioUpdateForm, UsuarioUpdatePasswordForm
+from .forms import UsuarioCreateForm, UsuarioUpdateForm, UpdatePasswordForm
 from .models import Usuario
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from rolepermissions.decorators import has_permission_decorator
 from django.contrib.auth.hashers import check_password
 
+# TODO Corrigir os messages para erros
 # @login_required
 @has_permission_decorator('gerenciar_usuarios')
 def UsuarioCreate(request):        
@@ -29,6 +30,7 @@ def UsuarioCreate(request):
 
     return render(request, 'usuarios/usuario_create.html', {'usuarios': usuarios})
 
+# TODO Corrigir os messages para erros
 # @login_required
 @has_permission_decorator('gerenciar_usuarios')
 def UsuarioUpdate(request, id):
@@ -56,23 +58,31 @@ def UsuarioUpdate(request, id):
     
     return render(request, 'usuarios/usuario_update.html', {'form':form})
 
-def UsuarioUpdatePassword(request, id):
+# TODO Corrigir os messages para erros
+# @login_required
+@has_permission_decorator('gerenciar_usuarios')
+def UpdatePassword(request, id):
     usuario = get_object_or_404(Usuario, id=id)
     senha_banco_hashe = usuario.password # Senha com HASHE salva no banco de dados  
 
     if request.method == 'POST':
-        form = UsuarioUpdatePasswordForm(request.POST or None, instance=usuario)
+        form = UpdatePasswordForm(request.POST or None, instance=usuario)
         if form.is_valid():
             senha_atual = form.cleaned_data.get('password')
             nova_senha = request.POST.get('new_password')
             confirmar_senha = request.POST.get('new_password_confirm')
 
+            if senha_atual and nova_senha == confirmar_senha:
+                if check_password(senha_atual, senha_banco_hashe):
+                    usuario.set_password(nova_senha)
+                    usuario.save()
+                    messages.success(request, 'Senha atualizada com sucesso!')
+                    return redirect(reverse('usuario-create'))
+                else:
+                    messages.error(request, 'Senha diferentes...')
+        else:
+            messages.error(request, 'Dados inválidos no formulário!')
+    else:
+        form = UpdatePasswordForm(instance=usuario)
 
-            # if senha_atual and nova_senha == confirmar_senha:
-            #     if check_password(senha_atual, senha_banco_hashe):
-            #         usuario.set_password(nova_senha)
-            #         usuario.save()
-            #         messages.success(request, 'Usuário atualizado!')
-            #         return redirect(reverse('usuario-create'))
-            #     else:
-            #         messages.error(request, 'Senha incorreta...')
+    return render(request, 'usuarios/update_password.html', {'form':form})

@@ -31,72 +31,72 @@
             <br>
             <div class="col">
                 <label for="cnpj">CNPJ</label>
-                <input type="text" name="cnpj" id="logo" required>
+                <input type="text" name="cnpj" id="logo" value="{{ form.cnpj.value|default:'' }}" required>
             </div>
             <br>
             <div class="col">
                 <label for="razao_social">Razão Social</label>
-                <input type="text" name="razao_social" id="razao_social" required>
+                <input type="text" name="razao_social" id="razao_social" value="{{ form.razao_social.value|default:'' }}" required>
             </div>
             <br>
             <div class="col">
                 <label for="porte">Porte</label>
-                <input type="text" name="porte" id="porte" required>
+                <input type="text" name="porte" id="porte" value="{{ form.porte.value|default:'' }}" required>
             </div>
             <br>
             <div class="col">
                 <label for="nome_fantasia">Nome Fantasia</label>
-                <input type="text" name="nome_fantasia" id="nome_fantasia" required>
+                <input type="text" name="nome_fantasia" id="nome_fantasia" value="{{ form.nome_fantasia.value|default:'' }}" required>
             </div>
             <br>
             <div class="col">
                 <label for="uf">UF</label>
-                <input type="text" name="uf" id="uf" required>
+                <input type="text" name="uf" id="uf" value="{{ form.uf.value|default:'' }}" required>
             </div>
             <br>
             <div class="col">
                 <label for="municipio">Município</label>
-                <input type="text" name="municipio" id="municipio" required>
+                <input type="text" name="municipio" id="municipio" value="{{ form.municipio.value|default:'' }}" required>
             </div>
             <br>
             <div class="col">
                 <label for="logradouro">Logradouro</label>
-                <input type="text" name="logradouro" id="logradouro" required>
+                <input type="text" name="logradouro" id="logradouro" value="{{ form.logradouro.value|default:'' }}" required>
             </div>
             <br>
             <div class="col">
                 <label for="numero">Número</label>
-                <input type="text" name="numero" id="numero" required>
+                <input type="text" name="numero" id="numero" value="{{ form.numero.value|default:'' }}" required>
             </div>
             <br>
             <div class="col">
                 <label for="cep">Cep</label>
-                <input type="text" name="cep" id="cep" required>
+                <input type="text" name="cep" id="cep" value="{{ form.cep.value|default:'' }}" required>
             </div>
             <br>
             <div class="col">
                 <label for="bairro">Bairro</label>
-                <input type="text" name="bairro" id="bairro" required>
+                <input type="text" name="bairro" id="bairro" value="{{ form.bairro.value|default:'' }}" required>
             </div>
             <br>
             <div class="col">
                 <label for="complemento">Complemento</label>
-                <input type="text" name="complemento">
+                <input type="text" name="complemento" id="complemento" value="{{ form.complemento.value|default:'' }}">
             </div>
             <br>
             <div class="col">
                 <label for="celular">Celular</label>
-                <input type="text" name="celular">
+                <input type="text" name="celular" id="celular" value="{{ form.celular.value|default:'' }}">
             </div>
             <br>
             <div class="col">
                 <label for="telefone">Telefone</label>
-                <input type="text" name="telefone">
+                <input type="text" name="telefone" id="telefone" value="{{ form.telefone.value|default:'' }}">
             </div>
             <br>
             <div class="col">
                 <label for="email">E-mail</label>
-                <input type="text" name="email">
+                <input type="text" name="email" id="email" value="{{ form.email.value|default:'' }}">
             </div>
         </div>
     </form>

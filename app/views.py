@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 from .forms import CompanyForm
 from django.contrib import messages
 from .models import Company
@@ -27,13 +28,13 @@ def CompanyCreate(request):
         if form.is_valid():
             if Company.objects.filter(ativo=True).exists():
                 messages.error(request, 'Já existe uma empresa cadastrada, não é permitido cadastrar outra!') # TODO Tratar o error no front-end.
-                return redirect('company-create')
+                return redirect(reverse('company-create'))
             else: 
                 company_instance = form.save(commit=False)
                 company_instance.criado_por = request.user
                 company_instance.logo = request.FILES.get('logo')
                 company_instance.save()
-                return redirect('company-view')
+                return redirect(reverse('company-view'))
         else:
             messages.error(request, 'Erro ao cadastrar empresa, o formulário não é válido!')
             
@@ -43,7 +44,7 @@ def CompanyCreate(request):
 def CompanyUpdate(request, id):
     company = get_object_or_404(Company, id=id)
     if request.method == 'POST':
-        form = CompanyForm(request.POST, request.FILES, instance=company)
+        form = CompanyForm(request.POST or None, request.FILES or None, instance=company)
         if form.is_valid():
             company_instance = form.save(commit=False)
             if 'remove_logo' in request.POST:
@@ -51,7 +52,7 @@ def CompanyUpdate(request, id):
             elif request.FILES.get('logo'):
                 company_instance.logo = request.FILES.get('logo')
             company_instance.save()
-            return redirect('company-view')
+            return redirect(reverse('company-view'))
         else:
             messages.error(request, 'Erro ao atualizar empresa, o formulário não é válido! ')
     else:

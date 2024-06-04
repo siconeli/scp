@@ -26,25 +26,28 @@
                 <div class="row">
                     <div class="col">
                         <label for="username">Usuário</label>
-                        <input type="text" name="username" id="username" placeholder="Digite seu nome de usuário..." required>
+                        <input type="text" name="username" id="username" value="{{ request.POST.username }}" placeholder="Digite seu nome de usuário..." required>
+                        {% if form.username.errors %}
+                            <div class="error">{{ form.username.errors }}</div>
+                        {% endif %}
                     </div>
                     <br>
                     <div class="col">
                         <label for="password">Senha</label>
-                        <input type="password" name="password" id="password" placeholder="Digite sua senha..." required>
+                        <input type="password" name="password" id="password" value="{{ request.POST.password }}" placeholder="Digite sua senha..." required>
                     </div>
                     <br>
                     <div class="col">
                         <label for="first_name">Nome</label>
-                        <input type="text" name="first_name" id="first_name" placeholder="Digite seu nome..." required>
+                        <input type="text" name="first_name" id="first_name" value="{{ request.POST.first_name }}" placeholder="Digite seu nome..." required>
                     </div>
                     <br>
                     <div class="col">
                         <label for="cargo">Cargo</label>
                         <select name="cargo" id="cargo" required>
                             <option value="">------</option>
-                            <option value="G">Gerente</option>
-                            <option value="A">Atendente</option>
+                            <option value="G" {% if request.POST.cargo == 'G' %}selected{% endif %}>Gerente</option>
+                            <option value="A" {% if request.POST.cargo == 'A' %}selected{% endif %}>Atendente</option>
                         </select>
                     </div>
                 </div>

@@ -33,12 +33,17 @@
                     </div>
                     <br>
                     <div class="col">
+                        <label for="password">Senha Atual</label>
+                        <input type="password" name="password" id="password"  placeholder="Digite a senha atual...">
+                    </div>
+                    <br>
+                    <div class="col">
                         <label for="new_password">Nova Senha</label>
                         <input type="password" name="new_password" id="new_password"  placeholder="Digite a nova senha...">
                     </div>
                     <br>
                     <div class="col">
-                        <label for="new_password_confirm">Confirmar Senha</label>
+                        <label for="new_password_confirm">Confirmar Nova Senha</label>
                         <input type="password" name="new_password_confirm" id="new_password_confirm"  placeholder="Confirme a nova senha...">
                     </div>
                     <br>
@@ -49,7 +54,7 @@
                     <br>
                     <div class="col">
                         <label for="cargo">Cargo</label>
-                        {% render_field form.cargo name="cargo" id="cargo" %}
+                        {% render_field form.cargo name="cargo" id="cargo" value="{{ form.instance.cargo }}" %}
                     </div>
                 </div>
             </form>

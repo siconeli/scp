@@ -4,12 +4,14 @@ from .forms import CompanyForm
 from django.contrib import messages
 from .models import Company
 from django.core.exceptions import ObjectDoesNotExist
-# from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 from rolepermissions.decorators import has_permission_decorator
 
+@login_required
 def Home(request):
     return render(request, 'home.html')
 
+@login_required
 def CompanyView(request):
     try:
         company = Company.objects.filter(ativo=True).latest('id')
@@ -21,6 +23,7 @@ def CompanyView(request):
 
     return render(request, 'company/company_view.html', context)
 
+@login_required
 @has_permission_decorator('gerenciar_empresa')
 def CompanyCreate(request):
     form = CompanyForm(request.POST or None, request.FILES or None)
@@ -40,6 +43,7 @@ def CompanyCreate(request):
             
     return render(request, 'company/company_create.html', {'form': form} )
 
+@login_required
 @has_permission_decorator('gerenciar_empresa')
 def CompanyUpdate(request, id):
     company = get_object_or_404(Company, id=id)

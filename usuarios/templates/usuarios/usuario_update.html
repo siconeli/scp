@@ -28,23 +28,13 @@
                 <br>
                 <div class="row">
                     <div class="col">
+                        <label for="is_active">Ativo</label>
+                        {% render_field form.is_active name="is_active" id="is_active" %}
+                    </div>
+                    <br>
+                    <div class="col">
                         <label for="username">Usuário</label>
                         <input type="text" name="username" id="username" value="{{ form.instance.username|default:'' }}" required>
-                    </div>
-                    <br>
-                    <div class="col">
-                        <label for="password">Senha Atual</label>
-                        <input type="password" name="password" id="password"  placeholder="Digite a senha atual...">
-                    </div>
-                    <br>
-                    <div class="col">
-                        <label for="new_password">Nova Senha</label>
-                        <input type="password" name="new_password" id="new_password"  placeholder="Digite a nova senha...">
-                    </div>
-                    <br>
-                    <div class="col">
-                        <label for="new_password_confirm">Confirmar Nova Senha</label>
-                        <input type="password" name="new_password_confirm" id="new_password_confirm"  placeholder="Confirme a nova senha...">
                     </div>
                     <br>
                     <div class="col">
